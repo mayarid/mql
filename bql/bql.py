@@ -1,8 +1,8 @@
 import re
-import pprint
 import os, sys, re
 from ply import lex, yacc
 from bql.utils import load_grammer, after, load_reserved_data, load_tokens_data
+from six import string_types
 
 class Location(dict):
   _line = None
@@ -340,7 +340,7 @@ class BQLParser(object):
     """literal : STRING
                | NUMBER
                | FLOAT_LIT """
-    if isinstance(p[1], basestring):
+    if isinstance(p[1], string_types):
       p[0] = ('value',"'" + str(p[1]) + "'")
     else:
       p[0] = ('value',p[1])
@@ -1161,11 +1161,6 @@ class BQLParser(object):
     args = dict(p[1],**p[3])
     args.update(p[4])
     p[0] = ('select',p[2],args)
-
-
-
-
-
 
 # -----------------------------------------------------------------
 
@@ -2297,7 +2292,7 @@ class BQLParser(object):
     if t.value == self.t_DELIM or t.value == ';' or t.type == 'BEGIN':
       self.last_tokens = []
     else:
-      if not (isinstance(t.value,basestring) and len(t.value) == 1 and t.value[0] in self.literals):
+      if not (isinstance(t.value, string_types) and len(t.value) == 1 and t.value[0] in self.literals):
         if after(self.last_tokens, ['SELECT']) == 0:
           if t.type != 'COUNT':
             t.type = 'IDENT'

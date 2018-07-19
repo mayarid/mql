@@ -1,0 +1,3 @@
+--- BQL Test file
+
+SELECT * FROM vm where name="vm-test1";
