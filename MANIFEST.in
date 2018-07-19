@@ -4,7 +4,7 @@ exclude .travis.yml
 include README.md
 include setup.cfg
 include requirements.txt
-include bql/grammers/reversed.yml
+include bql/grammers/reserved.yml
 include bql/grammers/tokens.yml
 prune .cache
 prune .git
