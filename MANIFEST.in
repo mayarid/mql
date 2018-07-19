@@ -1,0 +1,14 @@
+exclude .gitignore
+exclude .coverage
+exclude .travis.yml
+include README.md
+include setup.cfg
+include requirements.txt
+include bql/grammers/reversed.yml
+include bql/grammers/tokens.yml
+prune .cache
+prune .git
+prune build
+prune dist
+recursive-exclude *.egg-info *
+recursive-include tests *
