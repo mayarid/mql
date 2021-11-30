@@ -26,18 +26,18 @@ class RunTests(Command):
 
     def run(self):
         """Run all tests!"""
-        errno = call(['py.test', '--cov=bql', '--cov-report=term-missing'])
+        errno = call(['py.test', '--cov=mql', '--cov-report=term-missing'])
         raise SystemExit(errno)
 
 
 setup(
-    name='bql',
+    name='mql',
     version="0.1.0",
-    description='BiznetGIO Query Language',
+    description='Mayar Query Language',
     long_description=long_description,
-    url='https://github.com/BiznetGIO',
-    author='BiznetGio',
-    author_email='support@biznetgio.com',
+    url='https://github.com/mayarid',
+    author='Mayar Dev',
+    author_email='support@mayar.id',
     license='MIT',
     classifiers=[
         'Development Status :: 1 - Alpha',
@@ -62,10 +62,5 @@ setup(
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov'],
     },
-    # entry_points={
-    #     'console_scripts': [
-    #         'bql=bql.cli:main',
-    #     ],
-    # },
     cmdclass={'test': RunTests},
 )
