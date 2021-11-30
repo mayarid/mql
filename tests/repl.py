@@ -1,12 +1,12 @@
-from bql import BQLParser
+from mql import MQLParser
 import pprint
 
-p = BQLParser(debug=False)
+p = MQLParser(debug=False)
 
 def query(query):
 	result = p.parse(query)
 	pprint.pprint(result)
 
 while True:
-	q = input("BQL> ")
+	q = input("MQL> ")
 	query("{};".format(q))

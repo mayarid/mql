@@ -1,7 +1,7 @@
 import re
 import os, sys, re
 from ply import lex, yacc
-from bql.utils import load_grammer, after, load_reserved_data, load_tokens_data
+from mql.utils import load_grammer, after, load_reserved_data, load_tokens_data
 from six import string_types
 
 class Location(dict):
@@ -42,7 +42,7 @@ class Location(dict):
                       self._colno==0 and 1 or self._colno,
                       self._line, self.pointerline())
 
-class BQLError(Exception):
+class MQLError(Exception):
   def __init__(self, message, location, warning=False):
     self.message = message
     self.location = location
@@ -52,7 +52,7 @@ class BQLError(Exception):
     return "%s: %s, %s" % (self.warning and 'warning' or 'error',
                            self.message, self.location)
 
-class BQLParser(object):
+class MQLParser(object):
   reserved = load_grammer("reserved.yml")
   tokens = load_grammer("tokens.yml") + list(reserved.values())
 
@@ -153,10 +153,10 @@ class BQLParser(object):
 
   def p_error(self, t):
     if not t:
-      raise BQLError("Syntax Error at end of file. Possibly due to missing semicolon(';'), braces('}') or parens(')')", None)
+      raise MQLError("Syntax Error at end of file. Possibly due to missing semicolon(';'), braces('}') or parens(')')", None)
     else:
       location = Location(self.lexer, t.lineno, t.lexpos)
-      raise BQLError("invalid syntax", location)
+      raise MQLError("invalid syntax", location)
 
   # yacc functions ---------------------------------------------------------
 
@@ -2278,7 +2278,7 @@ class BQLParser(object):
 
   def error(self,p,i,message):
     location = Location(self.lexer, p.lineno(i), p.lexpos(i))
-    raise BQLError(message, location)
+    raise MQLError(message, location)
 
   # lex functions ----------------------------------------------------------
 
@@ -2351,14 +2351,14 @@ class BQLParser(object):
     self.lexer = lex.lex(object=self,
                          debug=True if debug else False,
                          outputdir=outputdir,
-                         lextab='bqllex',
+                         lextab='mqllex',
                          optimize=1)
     self.parser = yacc.yacc(start='statements',
                             debug=True if debug else False,
                             module=self,
                             outputdir=outputdir,
-                            debugfile='bql_debug',
-                            tabmodule='bqlyacc',
+                            debugfile='mql_debug',
+                            tabmodule='mqlyacc',
                             optimize=1)
 
   def parse(self, sql, filename=None):

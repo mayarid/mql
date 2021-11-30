@@ -3,7 +3,7 @@
 all: build upload clean
 
 test:
-			pytest --cov=bql --cov-report=term-missing
+			pytest --cov=mql --cov-report=term-missing
 
 build:
 			rm -rf dist
@@ -15,4 +15,4 @@ upload:
 
 clean:
 			find . -d -name "__pycache__" -exec rm -rf {} \;
-			rm -rf .coverage temp neo_cli.egg-info dist build .pytest_cache .ropeproject bql/bqllex.py bql/bqlyacc.py bql/bql_debug
+			rm -rf .coverage temp neo_cli.egg-info dist build .pytest_cache .ropeproject mql/mqllex.py mql/mqlyacc.py mql/mql_debug

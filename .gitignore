@@ -103,6 +103,6 @@ ENV/
 .mypy_cache/
 
 .vscode
-bql/bqllex.py
-bql/bqlyacc.py
-bql/bql_debug
+mql/mqllex.py
+mql/mqlyacc.py
+mql/mql_debug

@@ -1,7 +1,7 @@
-from bql import BQLParser
+from mql import MQLParser
 import pprint
 
-p = BQLParser(debug=False)
-filename = "test.bql"
+p = MQLParser(debug=False)
+filename = "test.mql"
 result = p.parse(open(filename).read())
 pprint.pprint(result)
